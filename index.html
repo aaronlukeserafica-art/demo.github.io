@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Departments & Services Selection</title>
+  <style>
+    :root { --primary: #2563eb; --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0; }
+    body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: #1e293b; margin: 0; padding: 20px; }
+    .container { max-width: 900px; margin: 0 auto; background: var(--card); padding: 24px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    h1 { text-align: center; margin-bottom: 24px; color: var(--primary); }
+    
+    /* New Facility Input Styling */
+    .form-group { margin-bottom: 20px; padding: 16px; background: #eff6ff; border-radius: 8px; border: 1px solid #bfdbfe; }
+    .form-group label { display: block; font-weight: 600; margin-bottom: 8px; color: #1e40af; }
+    .form-group input[type="text"] { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
+    .form-group input[type="text"]:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); }
+
+    form { display: grid; gap: 16px; }
+    
+    /* Select All Wrapper */
+    .select-all-wrapper { background: #f1f5f9; border: 1px solid #e2e8f0; padding: 10px 14px; border-radius: 8px; display: flex; align-items: center; gap: 10px; }
+    .select-all-wrapper label { font-weight: 600; color: #334155; cursor: pointer; margin: 0; }
+    .select-all-wrapper input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--primary); cursor: pointer; }
+    
+    fieldset { border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin: 0; }
+    fieldset legend { display: flex; align-items: center; justify-content: space-between; width: 100%; font-weight: 600; color: #334155; padding: 0 6px 8px; border-bottom: 1px solid var(--border); margin-bottom: 8px; }
+    
+    .dept-select-all { display: flex; align-items: center; gap: 6px; font-weight: 400; font-size: 0.85em; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 4px; cursor: pointer; }
+    .dept-select-all input { width: 15px; height: 15px; margin: 0; accent-color: var(--primary); }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 6px; margin-top: 4px; }
+    label { display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 3px 0; font-size: 0.95em; }
+    input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--primary); }
+    
+    button { background: var(--primary); color: white; padding: 12px; border: none; border-radius: 8px; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 16px; transition: background 0.2s; }
+    button:hover { background: #1d4ed8; }
+    button:disabled { background: #94a3b8; cursor: not-allowed; }
+    #status { text-align: center; margin-top: 16px; font-weight: 500; min-height: 20px; }
+    .success { color: #16a34a; }
+    .error { color: #dc2626; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Departments & Services</h1>
+    <form id="serviceForm">
+      
+      <!-- New Medical Facility Input -->
+      <div class="form-group">
+        <label for="facilityName">Medical Facility Name <span style="color:red">*</span></label>
+        <input type="text" id="facilityName" name="facility" placeholder="Enter the Full Name of your facility..." required>
+        <small class="text-info">Ex. Ospital ng Maynila Medical Center (OMMC) / Aurora Quezon Health Center</small>
+      </div>
+
+      <!-- Global Select All -->
+      <div class="select-all-wrapper">
+        <label><input type="checkbox" id="selectAllGlobal"> Select All Services</label>
+      </div>
+
+      <fieldset>
+        <legend><span>1. Anesthesiology</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="1.a. General Anesthesiology"> 1.a. General Anesthesiology</label>
+          <label><input type="checkbox" name="services" value="1.b. Pain Management"> 1.b. Pain Management</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>2. Dental</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="2.a. Endodontics"> 2.a. Endodontics</label>
+          <label><input type="checkbox" name="services" value="2.b. Oral and Maxillofacial Surgery"> 2.b. Oral & Maxillofacial Surgery</label>
+          <label><input type="checkbox" name="services" value="2.c. Oral Pathology"> 2.c. Oral Pathology</label>
+          <label><input type="checkbox" name="services" value="2.d. Orofacial Pain"> 2.d. Orofacial Pain</label>
+          <label><input type="checkbox" name="services" value="2.e. Orthodontics"> 2.e. Orthodontics</label>
+          <label><input type="checkbox" name="services" value="2.f. Pediatric Dentistry"> 2.f. Pediatric Dentistry</label>
+          <label><input type="checkbox" name="services" value="2.g. Periodontics"> 2.g. Periodontics</label>
+          <label><input type="checkbox" name="services" value="2.h. Prosthodontics"> 2.h. Prosthodontics</label>
+          <label><input type="checkbox" name="services" value="2.i. Radiology"> 2.i. Radiology</label>
+          <label><input type="checkbox" name="services" value="2.j. Restorative Dentistry"> 2.j. Restorative Dentistry</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>3. Dermatology</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="3.a. General Dermatology"> 3.a. General Dermatology</label>
+          <label><input type="checkbox" name="services" value="3.b. Cosmetic Dermatology"> 3.b. Cosmetic Dermatology</label>
+          <label><input type="checkbox" name="services" value="3.c. Medical Dermatology"> 3.c. Medical Dermatology</label>
+          <label><input type="checkbox" name="services" value="3.d. Surgical Dermatology"> 3.d. Surgical Dermatology</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>4. Emergency Medicine</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="4. Emergency Medicine"> 4. Emergency Medicine</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>5. Family Medicine</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="5.a. Ambulatory Care Services"> 5.a. Ambulatory Care</label>
+          <label><input type="checkbox" name="services" value="5.b. Animal Bite Treatment Center"> 5.b. Animal Bite Treatment</label>
+          <label><input type="checkbox" name="services" value="5.c. Family Counseling"> 5.c. Family Counseling</label>
+          <label><input type="checkbox" name="services" value="5.d. Geriatric Medicine"> 5.d. Geriatric Medicine</label>
+          <label><input type="checkbox" name="services" value="5.e. HIV Counseling"> 5.e. HIV Counseling</label>
+          <label><input type="checkbox" name="services" value="5.f. Nutrition and Dietetics"> 5.f. Nutrition & Dietetics</label>
+          <label><input type="checkbox" name="services" value="5.g. Pallative Care"> 5.g. Pallative Care</label>
+          <label><input type="checkbox" name="services" value="5.h. TB-DOTS"> 5.h. TB-DOTS</label>
+          <label><input type="checkbox" name="services" value="5.i. Wellness Clinic (Acupuncture and Acupressure)"> 5.i. Wellness Clinic</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>6. Internal Medicine</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="6.a. General Medicine"> 6.a. General Medicine</label>
+          <label><input type="checkbox" name="services" value="6.b. Allergy and Immunology"> 6.b. Allergy & Immunology</label>
+          <label><input type="checkbox" name="services" value="6.c. Cardiology"> 6.c. Cardiology</label>
+          <label><input type="checkbox" name="services" value="6.d. Endocrinology"> 6.d. Endocrinology</label>
+          <label><input type="checkbox" name="services" value="6.e. Gastroenterology"> 6.e. Gastroenterology</label>
+          <label><input type="checkbox" name="services" value="6.f. Hematology"> 6.f. Hematology</label>
+          <label><input type="checkbox" name="services" value="6.g. Infectious Diseases"> 6.g. Infectious Diseases</label>
+          <label><input type="checkbox" name="services" value="6.h. Nephrology and Hemodialysis"> 6.h. Nephrology & Hemodialysis</label>
+          <label><input type="checkbox" name="services" value="6.i. Neurology"> 6.i. Neurology</label>
+          <label><input type="checkbox" name="services" value="6.j. Oncology"> 6.j. Oncology</label>
+          <label><input type="checkbox" name="services" value="6.k. Pulmonology"> 6.k. Pulmonology</label>
+          <label><input type="checkbox" name="services" value="6.l. Rheumatology"> 6.l. Rheumatology</label>
+          <label><input type="checkbox" name="services" value="6.m. Toxicology"> 6.m. Toxicology</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>7. Ophthalmology</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="7.a. Cataract/Refractive Surgery"> 7.a. Cataract/Refractive Surgery</label>
+          <label><input type="checkbox" name="services" value="7.b. Cornea and External Diseases"> 7.b. Cornea & External Diseases</label>
+          <label><input type="checkbox" name="services" value="7.c. General Ophthalmology"> 7.c. General Ophthalmology</label>
+          <label><input type="checkbox" name="services" value="7.d. Glaucoma"> 7.d. Glaucoma</label>
+          <label><input type="checkbox" name="services" value="7.e. Low Vision"> 7.e. Low Vision</label>
+          <label><input type="checkbox" name="services" value="7.f. Neuro-ophthalmology"> 7.f. Neuro-ophthalmology</label>
+          <label><input type="checkbox" name="services" value="7.g. Ocular Oncology"> 7.g. Ocular Oncology</label>
+          <label><input type="checkbox" name="services" value="7.h. Oculoplastics and Orbit Surgery"> 7.h. Oculoplastics & Orbit Surgery</label>
+          <label><input type="checkbox" name="services" value="7.i. Ophthalmic Pathology"> 7.i. Ophthalmic Pathology</label>
+          <label><input type="checkbox" name="services" value="7.j. Pediatric Ophthalmology and Strabiscus"> 7.j. Pediatric Ophthalmology & Strabismus</label>
+          <label><input type="checkbox" name="services" value="7.k. Retina and Vitreous"> 7.k. Retina & Vitreous</label>
+          <label><input type="checkbox" name="services" value="7.l. Uveitis and Immunology"> 7.l. Uveitis & Immunology</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>8. Obstetrics and Gynecology</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="8.a. Family planning"> 8.a. Family Planning</label>
+          <label><input type="checkbox" name="services" value="8.b. Female pelvic medicine and reconstructive surgery"> 8.b. Female Pelvic & Reconstructive</label>
+          <label><input type="checkbox" name="services" value="8.c. Gynecology"> 8.c. Gynecology</label>
+          <label><input type="checkbox" name="services" value="8.d. Gynecological oncology"> 8.d. Gynecological Oncology</label>
+          <label><input type="checkbox" name="services" value="8.e. Labor and Delivery"> 8.e. Labor & Delivery</label>
+          <label><input type="checkbox" name="services" value="8.f. Maternal - fetal medicine (Perinatology)"> 8.f. Maternal-Fetal (Perinatology)</label>
+          <label><input type="checkbox" name="services" value="8.g. Menopausal and geriatric gynecology"> 8.g. Menopausal & Geriatric Gyn</label>
+          <label><input type="checkbox" name="services" value="8.h. Pediatric and adolescent gynecology"> 8.h. Pediatric & Adolescent Gyn</label>
+          <label><input type="checkbox" name="services" value="8.i. Post-natal Care"> 8.i. Post-natal Care</label>
+          <label><input type="checkbox" name="services" value="8.j. Pre-natal Care"> 8.j. Pre-natal Care</label>
+          <label><input type="checkbox" name="services" value="8.k. Reproductive endocrinology and infertility"> 8.k. Reproductive Endocrinology</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>9. Otorhinolaryngology (ORL-HNS)</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="9.a. Cranio-Maxillofacial Trauma"> 9.a. Cranio-Maxillofacial Trauma</label>
+          <label><input type="checkbox" name="services" value="9.b. Facial Aesthetics Plastic & Reconstructive Surgery"> 9.b. Facial Aesthetics & Reconstructive</label>
+          <label><input type="checkbox" name="services" value="9.c. Head and Neck Surgery"> 9.c. Head & Neck Surgery</label>
+          <label><input type="checkbox" name="services" value="9.d. Laryngology and Bronchoesophagology"> 9.d. Laryngology & Bronchoesophagology</label>
+          <label><input type="checkbox" name="services" value="9.e. Otology, Audiology and Neuro-Otology"> 9.e. Otology, Audiology & Neuro-Otology</label>
+          <label><input type="checkbox" name="services" value="9.f. Pediatric Otorhinolaryngology"> 9.f. Pediatric ORL</label>
+          <label><input type="checkbox" name="services" value="9.g. Rhinopharyngology and Allergology"> 9.g. Rhinopharyngology & Allergology</label>
+          <label><input type="checkbox" name="services" value="9.h. Sleep Disorder and Surgery"> 9.h. Sleep Disorder & Surgery</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>10. Pediatrics</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="10.a. General Pediatrics"> 10.a. General Pediatrics</label>
+          <label><input type="checkbox" name="services" value="10.b. Adolescent Clinic"> 10.b. Adolescent Clinic</label>
+          <label><input type="checkbox" name="services" value="10.c. Allergy and Immunology"> 10.c. Allergy & Immunology</label>
+          <label><input type="checkbox" name="services" value="10.d. Cardiology"> 10.d. Cardiology</label>
+          <label><input type="checkbox" name="services" value="10.e. Child Abuse Pediatrics"> 10.e. Child Abuse Pediatrics</label>
+          <label><input type="checkbox" name="services" value="10.f. Dermatology"> 10.f. Dermatology</label>
+          <label><input type="checkbox" name="services" value="10.g. Developmental-Behavioral Pediatrics"> 10.g. Developmental-Behavioral</label>
+          <label><input type="checkbox" name="services" value="10.h. Endocrinology"> 10.h. Endocrinology</label>
+          <label><input type="checkbox" name="services" value="10.i. Gastroenterology"> 10.i. Gastroenterology</label>
+          <label><input type="checkbox" name="services" value="10.j. Genetics"> 10.j. Genetics</label>
+          <label><input type="checkbox" name="services" value="10.k. Hematology-Oncology"> 10.k. Hematology-Oncology</label>
+          <label><input type="checkbox" name="services" value="10.l. Infectious Diseases"> 10.l. Infectious Diseases</label>
+          <label><input type="checkbox" name="services" value="10.m. Intensive Care"> 10.m. Intensive Care</label>
+          <label><input type="checkbox" name="services" value="10.n. Neonatology"> 10.n. Neonatology</label>
+          <label><input type="checkbox" name="services" value="10.o. Nephrology"> 10.o. Nephrology</label>
+          <label><input type="checkbox" name="services" value="10.p. Neurology"> 10.p. Neurology</label>
+          <label><input type="checkbox" name="services" value="10.q. Pulmonology"> 10.q. Pulmonology</label>
+          <label><input type="checkbox" name="services" value="10.r. Rheumatology"> 10.r. Rheumatology</label>
+          <label><input type="checkbox" name="services" value="10.s. Toxicology"> 10.s. Toxicology</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>11. Psychiatry</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="11.a. Addiction"> 11.a. Addiction</label>
+          <label><input type="checkbox" name="services" value="11.b. Child and Adolescent"> 11.b. Child & Adolescent</label>
+          <label><input type="checkbox" name="services" value="11.c. Forensic Psychiatry"> 11.c. Forensic Psychiatry</label>
+          <label><input type="checkbox" name="services" value="11.d. Geriatric Psychiatry"> 11.d. Geriatric Psychiatry</label>
+          <label><input type="checkbox" name="services" value="11.e. Psychosomatic Medicine"> 11.e. Psychosomatic Medicine</label>
+          <label><input type="checkbox" name="services" value="11.f. Individual Counseling"> 11.f. Individual Counseling</label>
+          <label><input type="checkbox" name="services" value="11.g. Neuropsychiatry"> 11.g. Neuropsychiatry</label>
+          <label><input type="checkbox" name="services" value="11.h. Psychiatry of Intellectual and Developmental Disabilities"> 11.h. Psychiatry of IDD</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>12. Radiology</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="12.a. 2D-Echo"> 12.a. 2D-Echo</label>
+          <label><input type="checkbox" name="services" value="12.b. Angiogram"> 12.b. Angiogram</label>
+          <label><input type="checkbox" name="services" value="12.c. Angioplasty"> 12.c. Angioplasty</label>
+          <label><input type="checkbox" name="services" value="12.d. CT-Scan"> 12.d. CT-Scan</label>
+          <label><input type="checkbox" name="services" value="12.e. ECG"> 12.e. ECG</label>
+          <label><input type="checkbox" name="services" value="12.f. Magnetic Resonance Imaging (MRI)"> 12.f. MRI</label>
+          <label><input type="checkbox" name="services" value="12.g. Mammography"> 12.g. Mammography</label>
+          <label><input type="checkbox" name="services" value="12.h. Ultrasound"> 12.h. Ultrasound</label>
+          <label><input type="checkbox" name="services" value="12.i. X-Ray"> 12.i. X-Ray</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>13. Rehabilitation Medicine and Physical Therapy Service</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="13.a. Physical Therapy"> 13.a. Physical Therapy</label>
+          <label><input type="checkbox" name="services" value="13.b. Occupational Therapy"> 13.b. Occupational Therapy</label>
+          <label><input type="checkbox" name="services" value="13.c. Brian Injury Medicine"> 13.c. Brain Injury Medicine</label>
+          <label><input type="checkbox" name="services" value="13.d. Neuro-mascular Medicine"> 13.d. Neuromuscular Medicine</label>
+          <label><input type="checkbox" name="services" value="13.e. Pain Medicine"> 13.e. Pain Medicine</label>
+          <label><input type="checkbox" name="services" value="13.f. Pediatric Rehabilitation Medicine"> 13.f. Pediatric Rehabilitation</label>
+          <label><input type="checkbox" name="services" value="13.g. Spinal Cord Injury Medicine"> 13.g. Spinal Cord Injury Medicine</label>
+          <label><input type="checkbox" name="services" value="13.h. Sports Medicine"> 13.h. Sports Medicine</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>14. Surgery</span><label class="dept-select-all"><input type="checkbox" class="dept-select-all-cb"> Select All</label></legend>
+        <div class="grid">
+          <label><input type="checkbox" name="services" value="14.a. General Surgery"> 14.a. General Surgery</label>
+          <label><input type="checkbox" name="services" value="14.b. Burns"> 14.b. Burns</label>
+          <label><input type="checkbox" name="services" value="14.c. Cardiovascular Surgery"> 14.c. Cardiovascular Surgery</label>
+          <label><input type="checkbox" name="services" value="14.d. Maxillofacial"> 14.d. Maxillofacial</label>
+          <label><input type="checkbox" name="services" value="14.e. Neurosurgery"> 14.e. Neurosurgery</label>
+          <label><input type="checkbox" name="services" value="14.f. Orthopedics"> 14.f. Orthopedics</label>
+          <label><input type="checkbox" name="services" value="14.g. Pediatric Surgery"> 14.g. Pediatric Surgery</label>
+          <label><input type="checkbox" name="services" value="14.h. Plastic and Reconstructive Surgery"> 14.h. Plastic & Reconstructive</label>
+          <label><input type="checkbox" name="services" value="14.i. Surgical Oncology"> 14.i. Surgical Oncology</label>
+          <label><input type="checkbox" name="services" value="14.j. Thoracic Surgery"> 14.j. Thoracic Surgery</label>
+          <label><input type="checkbox" name="services" value="14.k. Trauma"> 14.k. Trauma</label>
+          <label><input type="checkbox" name="services" value="14.l. Urology"> 14.l. Urology</label>
+          <label><input type="checkbox" name="services" value="14.m. Vascular Surgery"> 14.m. Vascular Surgery</label>
+        </div>
+      </fieldset>
+
+      <button type="submit" id="submitBtn">Submit Selection</button>
+    </form>
+    <div id="status"></div>
+  </div>
+
+  <script>
+    // ⚠️ REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+    const GAS_URL = 'https://script.google.com/macros/s/AKfycbx8QQT3tcdnxsLmPnzZrj85Iae6cj3LnMlAzO4TGhnjR6Tq10ZOUTpO0ZoODgfVn_FAaA/exec';
+    const selectAllGlobal = document.getElementById('selectAllGlobal');
+    const deptSelectAlls = document.querySelectorAll('.dept-select-all-cb');
+    const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+
+    function updateDeptState(fieldset) {
+      const checkboxes = fieldset.querySelectorAll('input[name="services"]');
+      const deptCheckbox = fieldset.querySelector('.dept-select-all-cb');
+      const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const total = checkboxes.length;
+      deptCheckbox.checked = checkedCount === total;
+      deptCheckbox.indeterminate = checkedCount > 0 && checkedCount < total;
+    }
+
+    function updateGlobalState() {
+      const checkedCount = Array.from(serviceCheckboxes).filter(cb => cb.checked).length;
+      const total = serviceCheckboxes.length;
+      selectAllGlobal.checked = checkedCount === total;
+      selectAllGlobal.indeterminate = checkedCount > 0 && checkedCount < total;
+    }
+
+    // Global Select All
+    selectAllGlobal.addEventListener('change', function() {
+      serviceCheckboxes.forEach(cb => cb.checked = this.checked);
+      document.querySelectorAll('fieldset').forEach(updateDeptState);
+    });
+
+    // Per-Department Select All
+    deptSelectAlls.forEach(cb => {
+      cb.addEventListener('change', function() {
+        const fieldset = this.closest('fieldset');
+        const services = fieldset.querySelectorAll('input[name="services"]');
+        services.forEach(s => s.checked = this.checked);
+        updateGlobalState();
+      });
+    });
+
+    // Individual Service Change
+    serviceCheckboxes.forEach(cb => {
+      cb.addEventListener('change', function() {
+        updateDeptState(this.closest('fieldset'));
+        updateGlobalState();
+      });
+    });
+
+    // Form Submission
+    document.getElementById('serviceForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const statusEl = document.getElementById('status');
+      const btn = document.getElementById('submitBtn');
+      
+      const facilityName = document.getElementById('facilityName').value.trim();
+      const checked = document.querySelectorAll('input[name="services"]:checked');
+      
+      if (!facilityName) {
+        statusEl.textContent = 'Please enter the Medical Facility Name.';
+        statusEl.className = 'error';
+        document.getElementById('facilityName').focus();
+        return;
+      }
+      
+      if (checked.length === 0) {
+        statusEl.textContent = 'Please select at least one service.';
+        statusEl.className = 'error';
+        return;
+      }
+
+      const selected = Array.from(checked).map(cb => cb.value);
+      btn.disabled = true;
+      btn.textContent = 'Submitting...';
+      statusEl.textContent = '';
+
+      try {
+        await fetch(GAS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' }, // Bypasses CORS preflight for GAS
+          body: JSON.stringify({ facility: facilityName, services: selected })
+        });
+        
+        statusEl.textContent = '✅ Successfully submitted! Data saved to Google Sheet.';
+        statusEl.className = 'success';
+        
+        this.reset();
+        selectAllGlobal.indeterminate = false;
+        document.querySelectorAll('.dept-select-all-cb').forEach(cb => cb.indeterminate = false);
+      } catch (err) {
+        statusEl.textContent = '❌ Submission failed. Check console for details.';
+        statusEl.className = 'error';
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit Selection';
+      }
+    });
+  </script>
+</body>
+</html>
